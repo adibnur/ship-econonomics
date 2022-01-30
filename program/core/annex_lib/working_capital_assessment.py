@@ -54,6 +54,18 @@ class working_capital:
         #Utilities
         self.utils = self.get_utils(inp_flow)
 
+        # Tables
+        #*Inventory of consumables
+        self.table_inventory = pd.DataFrame([self.operating_staff, self.admin_and_general_exp, self.utils], columns=range(1,9),
+                            index=['Operating staffs', 'Administrative & General expenses', 'Utilities'])
+
+        #main table - working capital assessment
+        self.table_main = pd.DataFrame([self.cap_util, self.fuel_and_other, self.table_inventory.sum(), self.spares_and_acc,
+              self.inventory_ready, self.work_in_progress, self.account_rec, self.cash], columns=range(1,9),
+              index=['Capacity utilization', 'Fuel & other materials', 'Inventory of consumables',
+              'Spares & accessories', 'Inventory of ready service', 'Work in progress', 'Account receiveables', 'Cash'])
+
+
 
     def get_spares_and_acc(self, inp_flow):
         init_cost = inp_flow.repair_maintenance.set_index("Description").loc['Spares and stores', 'Initial Cost (BDT in lac)']
