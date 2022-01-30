@@ -1,4 +1,5 @@
 import pandas as pd
+from math import ceil
 from . import key_match_helpers
 
 class staff_salary:
@@ -46,8 +47,7 @@ class financial_assumptions:
 
         self.depreciation_rate = self.df.loc['Depreciation rates in straight line method', 'Value']
 
-        #is this necessary? if not, remove
-        self.economic_life = self.df.loc['Economic Life of Project (years)', 'Value']
+        self.loan_period = self.df.loc['Total Loan Period (Years)', 'Value']
 
         self.interest_rate = self.df.loc['Interest on Capital Loan', 'Value']
 
@@ -55,17 +55,27 @@ class financial_assumptions:
 
         self.grace_period = self.df.loc['Grace Period (months)', 'Value']
 
-        self.num_installments_principal = self.df.loc['Total Number of Installments for Principal Loan', 'Value']
-
         self.freq_installments = self.df.loc['Frequency of Installments (months)', 'Value']
 
         self.num_installments_IDCP = self.df.loc['Total Number of Installments for Interest During Grace Period', 'Value']
+
+        # calculated. Can be taken as input, but doesn't seem necessary at the moment
+        #self.num_installments_principal = self.df.loc['Total Number of Installments for Principal Loan', 'Value']
+        self.num_installments_principal =  (self.loan_period * 12 - (self.construction_period + self.grace_period)) / self.freq_installments
 
         #should we keep this as input?
         self.rate_of_revenue_expenditure = self.df.loc['Rate of Revenue Expenditure', 'Value']
 
         #remove this from inputs. formula = preliminary expenses * 1.88 / 20 (verify)
         self.ammortization_of_prel = 1.88
+
+        self.debt_equity = {'Debt' : self.df.loc['Debt : Equity Ratio', 'Value'],
+                            'Equity' : self.df.loc['Debt : Equity Ratio', 'Unnamed: 3']}
+
+        # calculated. not for input
+        self.report_lenght_years = self.loan_period - (self.construction_period + self.grace_period) / 12
+        self.report_lenght_years = ceil(self.report_lenght_years)
+
 
     def __repr__(self):
         return '\n'.join([f'{i} : {self.__dict__[i]}' for i in self.__dict__.keys() if i!='df'])
