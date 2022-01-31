@@ -61,7 +61,7 @@ class financial_assumptions:
 
         # calculated. Can be taken as input, but doesn't seem necessary at the moment
         #self.num_installments_principal = self.df.loc['Total Number of Installments for Principal Loan', 'Value']
-        self.num_installments_principal =  (self.loan_period * 12 - (self.construction_period + self.grace_period)) / self.freq_installments
+        self.num_installments_principal =  round((self.loan_period * 12 - (self.construction_period + self.grace_period)) / self.freq_installments)
 
         #should we keep this as input?
         self.rate_of_revenue_expenditure = self.df.loc['Rate of Revenue Expenditure', 'Value']
