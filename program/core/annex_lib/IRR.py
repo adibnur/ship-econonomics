@@ -25,9 +25,6 @@ class IRR:
 
 
     def get_table_irr(self, inp_flow):
-        #cols = ["Year", "Net Receipt",	f"Discounted Cash Flow at {round(self.irr*100)}%",	"Present Value at 15%"]
-        #data = np.array([range(inp_flow.financial_assumptions.report_lenght_years+1),
-        #                self.net_receipt, self.disc_column, self.irr]).T
         df = pd.DataFrame({
         "Year" : range(inp_flow.financial_assumptions.report_lenght_years+1),
         "Net Receipt" : self.net_receipt,

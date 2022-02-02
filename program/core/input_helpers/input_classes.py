@@ -72,6 +72,8 @@ class financial_assumptions:
         self.debt_equity = {'Debt' : self.df.loc['Debt : Equity Ratio', 'Value'],
                             'Equity' : self.df.loc['Debt : Equity Ratio', 'Unnamed: 3']}
 
+        self.disc_rate_payback_period = self.df.loc['Discount Rate for Payback Period', 'Value']
+
         # calculated. not for input
         self.report_lenght_years = self.loan_period - (self.construction_period + self.grace_period) / 12
         self.report_lenght_years = ceil(self.report_lenght_years)

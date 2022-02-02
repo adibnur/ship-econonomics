@@ -56,12 +56,14 @@ class working_capital:
 
         # Tables
         #*Inventory of consumables
-        self.table_inventory = pd.DataFrame([self.operating_staff, self.admin_and_general_exp, self.utils], columns=range(1,9),
+        self.table_inventory = pd.DataFrame([self.operating_staff, self.admin_and_general_exp, self.utils],
+                            columns=range(1,inp_flow.financial_assumptions.report_lenght_years+1),
                             index=['Operating staffs', 'Administrative & General expenses', 'Utilities'])
 
         #main table - working capital assessment
         self.table_main = pd.DataFrame([self.cap_util, self.fuel_and_other, self.table_inventory.sum(), self.spares_and_acc,
-              self.inventory_ready, self.work_in_progress, self.account_rec, self.cash], columns=range(1,9),
+              self.inventory_ready, self.work_in_progress, self.account_rec, self.cash],
+              columns=range(1,inp_flow.financial_assumptions.report_lenght_years+1),
               index=['Capacity utilization', 'Fuel & other materials', 'Inventory of consumables',
               'Spares & accessories', 'Inventory of ready service', 'Work in progress', 'Account receiveables', 'Cash'])
 
