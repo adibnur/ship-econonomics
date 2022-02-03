@@ -74,6 +74,8 @@ class financial_assumptions:
 
         self.disc_rate_payback_period = self.df.loc['Discount Rate for Payback Period', 'Value']
 
+        self.disc_rate_cost_benefit = self.df.loc['Discount Rate for Cost Benefit Analysis', 'Value']
+
         # calculated. not for input
         self.report_lenght_years = self.loan_period - (self.construction_period + self.grace_period) / 12
         self.report_lenght_years = ceil(self.report_lenght_years)
