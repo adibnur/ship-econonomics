@@ -15,7 +15,7 @@ class IRR:
                             + income_statement.operating_staff + income_statement.overheads) -
                             income_statement.total_operating_exp).tolist()
 
-        self.irr = np.irr(self.net_receipt)
+        self.irr = self.IRR_by_Secant_Method()
 
         self.disc_column = [(1/(1+self.irr)**i) for i in range(inp_flow.financial_assumptions.report_lenght_years+1)]
 
@@ -33,3 +33,23 @@ class IRR:
         })
 
         return df
+
+    def IRR_by_Secant_Method(self, xi=.15, xim1=0.25):
+        """
+        Secant method for finding IRR root where NPV == 0
+        """
+        f = lambda x : sum([i * (1/((1+x)**e)) for e, i in enumerate(self.net_receipt)])
+
+        eps = np.nan
+        run = True
+        steps = 0
+        while run:
+            xi_new = xi - ( f(xi)*(xi - xim1) ) / ( f(xi) - f(xim1) )
+            eps = abs((xi_new - xi) / xi_new)*100
+            xim1 = xi
+            xi = xi_new
+            steps += 1
+            if eps < 10**(-6) or steps==10**3 or f(xi) < 10**(-6):
+                run = False
+
+        return xi
