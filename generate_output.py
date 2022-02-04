@@ -2,17 +2,17 @@
 This is for use in generating outputs from created project folders only
 """
 from pathlib import Path
-from program.core import annex_lib
-from program.core import tex_generators
-from program.core.map_inputs import input_flow
+from core import annex_lib
+from core import tex_generators
+from core.map_inputs import input_flow
 
 if __name__=='__main__':
     project_name = input("Enter project name: ")
-    while not Path('program\\'+project_name).is_dir():
+    while not Path('Projects\\'+project_name).is_dir():
         print("There are no projects named - " + project_name)
         project_name = input("Please enter a new project_name: ")
 
-    project_path = 'program\\'+project_name
+    project_path = 'Projects\\'+project_name
 
     inp_flow = input_flow(
         df_staff= project_path + '\\input_staff.xlsx',
