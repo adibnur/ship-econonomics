@@ -40,16 +40,14 @@ class IRR:
         """
         f = lambda x : sum([i * (1/((1+x)**e)) for e, i in enumerate(self.net_receipt)])
 
-        eps = np.nan
         run = True
         steps = 0
         while run:
             xi_new = xi - ( f(xi)*(xi - xim1) ) / ( f(xi) - f(xim1) )
-            eps = abs((xi_new - xi) / xi_new)*100
             xim1 = xi
             xi = xi_new
             steps += 1
-            if eps < 10**(-6) or steps==10**3 or f(xi) < 10**(-6):
+            if steps==10**3 or abs(f(xi)) < 10**(-4):
                 run = False
 
         return xi

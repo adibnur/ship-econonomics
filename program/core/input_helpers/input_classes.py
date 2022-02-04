@@ -4,7 +4,7 @@ from . import key_match_helpers
 
 class staff_salary:
     def __init__(self, df_dir, sheet_name, yearly_bonus_in_months=2):
-        self.df = pd.read_excel(df_dir, sheet_name)
+        self.df = pd.read_excel(df_dir, sheet_name, engine='openpyxl')
         self.df = key_match_helpers.staff_salary_matcher(self.df)
 
         self.df['Annual Salary (BDT in lac)'] = self.df['No. of Persons'] * self.df['Monthly Salary (in BDT)'] * 12 / 10**5
@@ -14,25 +14,25 @@ class staff_salary:
 
 class technical_inputs:
     def __init__(self, df_dir):
-        self.df_revenue = pd.read_excel(df_dir, sheet_name='Revenue Earnings')
+        self.df_revenue = pd.read_excel(df_dir, sheet_name='Revenue Earnings', engine='openpyxl')
         self.df_revenue['Yearly Revenue (BDT in Lac)'] = (self.df_revenue['Number of Trip / Month'] * 12
             * self.df_revenue['Vessel carrying capacity (MT)'] * self.df_revenue['Freight Charge / MT (BDT)']
             * self.df_revenue['No. of vessels'] * 2 / 100000)
 
-        self.df_service_mat = pd.read_excel(df_dir, sheet_name='Service Materials')
+        self.df_service_mat = pd.read_excel(df_dir, sheet_name='Service Materials', engine='openpyxl')
         self.df_service_mat['Cost per Year (BDT in Lac)'] = self.df_service_mat['Cost per Month'] * 12 / (10**5)
 
-        self.df_equipment = pd.read_excel(df_dir, sheet_name='Equipment Cost')
+        self.df_equipment = pd.read_excel(df_dir, sheet_name='Equipment Cost', engine='openpyxl')
         self.df_equipment['Total Cost (BDT in Lac)'] = self.df_equipment['Unit Cost (BDT in Lac)'] * self.df_equipment['No. of Units']
 
-        self.df_misc = pd.read_excel(df_dir, sheet_name='Misc. Cost')
+        self.df_misc = pd.read_excel(df_dir, sheet_name='Misc. Cost', engine='openpyxl')
         self.df_misc['Yearly Cost (BDT in lac)'] = self.df_misc['Monthly Cost (in BDT)'] * 12 / (10**5)
 
-        self.df_expenses = pd.read_excel(df_dir, sheet_name='Expenses')
+        self.df_expenses = pd.read_excel(df_dir, sheet_name='Expenses', engine='openpyxl')
 
 class financial_assumptions:
     def __init__(self, df_dir):
-        self.df = pd.read_excel(df_dir, sheet_name='Economic Assumptuions')
+        self.df = pd.read_excel(df_dir, sheet_name='Economic Assumptuions', engine='openpyxl')
         self.df = self.df.set_index('Description')
 
         self.days_of_operation = self.df.loc['Days of Operation Per Year (days)', 'Value']
