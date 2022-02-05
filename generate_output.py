@@ -26,3 +26,15 @@ if __name__=='__main__':
     # Generating IRR .tex file
     irr = annex_lib.IRR(inp_flow)
     tex_generators.IRR_tex.generate_tex_file(irr, project_path+"\\Output Files\\IRR.tex")
+
+    # Generating Cost Benefit Analysis .tex file
+    cba = annex_lib.cost_benefit_analysis(inp_flow)
+    tex_generators.cost_benefit_tex.generate_tex_file(cba, project_path+"\\Output Files\\Cost Benefit Analysis.tex")
+
+    # Generating Debt Service Coverage Ratio .tex file
+    dscr = annex_lib.debt_service_coverage(inp_flow)
+    tex_generators.debt_service_tex.generate_tex_file(dscr, project_path+"\\Output Files\\Debt Service Coverage.tex")
+
+    # # Generating Payback Period .tex file
+    pbp = annex_lib.payback_period(inp_flow)
+    tex_generators.payback_period_tex.generate_tex_file(pbp, project_path+"\\Output Files\\Payback Period.tex")

@@ -6,6 +6,6 @@ from .financial_report import financial_report
 from .IRR import IRR
 from .LTL_ammortization import LTL_ammortization
 from .overhead_depreciation import overhead_depreciation
+from .payback_period import payback_period
 from .revenue_earnings_estimate import revenue_earnings
 from .working_capital_assessment import working_capital
-from .break_even_analysis import break_even_analysis
