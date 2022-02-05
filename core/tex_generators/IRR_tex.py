@@ -24,7 +24,7 @@ def generate_tex_file(IRR, out_path):
     \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
     \multicolumn{4}{r}{BDT in Lac}\\
         \hline
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         """
     columns = ' '.join([f"\\textbf{'{'+col+'}'} &" for col in IRR.table_irr.columns]).replace('%', '\\%')[:-2] + "\\\\ \\hline \n"
     out += columns
@@ -46,7 +46,7 @@ def generate_tex_file(IRR, out_path):
     \begin{tabular}{|p{5cm}|c|}
 
         \hline
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         """
 
     out += "\\textbf{Internal Rate of Return} &" + f"{round(IRR.irr*100, 2)}" + "\% \\\\ \hline \n"

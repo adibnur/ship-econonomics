@@ -23,7 +23,7 @@ def generate_tex_file(payback_period, out_path):
     \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
     \multicolumn{5}{r}{BDT in Lac}\\
         \hline
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         """
 
     columns = ' '.join([f"\\textbf{'{'+col+'}'} &" for col in payback_period.table_payback_period.columns]).replace('%', '\\%')[:-2] + "\\\\ \\hline \n"
@@ -42,7 +42,7 @@ def generate_tex_file(payback_period, out_path):
 
     \begin{tabular}{|p{5cm}|p{1cm}|}
          \hline
-         \rowcolor[HTML]{03c8a8}"""
+         \rowcolor[HTML]{b0e0e6}"""
 
     out += r"\textbf{Payback period in years} &" + str(payback_period.payback_period) + r"\\ \hline"
 

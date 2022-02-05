@@ -23,7 +23,7 @@ def generate_tex_file(cost_benefit, out_path):
     \begin{tabular}{|p{1cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.75cm}|p{1.75cm}|p{1.5cm}|p{1.5cm}|p{1.75cm}|}
         \multicolumn{8}{r}{BDT in Lac}\\
         \hline
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         """
 
     columns = ' '.join([f"\\textbf{'{'+col+'}'} &" for col in cost_benefit.table.columns]).replace('%', '\\%')[:-2] + "\\\\ \\hline \n"
@@ -46,7 +46,7 @@ def generate_tex_file(cost_benefit, out_path):
     \begin{tabular}{|p{5cm}|c|}
 
         \hline
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         """
     out += r"\textbf{Benefit Cost Ratio (BCR)} &" + f"{round(cost_benefit.cost_benefit_ratio, 2)}" + ": 1" + " \\\\ \hline"
 

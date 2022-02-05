@@ -8,6 +8,15 @@ from core.map_inputs import input_flow
 
 if __name__=='__main__':
     project_name = input("Enter project name: ")
+
+    while True:
+        try:
+            Path('Projects\\'+project_name).is_dir()
+            break
+        except:
+            print("Invalid project name")
+            project_name = input("Please enter a valid project name: ")
+
     while not Path('Projects\\'+project_name).is_dir():
         print("There are no projects named - " + project_name)
         project_name = input("Please enter a new project_name: ")

@@ -21,17 +21,17 @@ def generate_tex_file(debt_service, out_path):
     \multicolumn{9}{r}{BDT in Lac}\\
         \hline
 
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         \multicolumn{1}{|c|}{} & \multicolumn{8}{c|}{\textbf{Year}}\\ \hline
 
-        \rowcolor[HTML]{03c8a8}
+        \rowcolor[HTML]{b0e0e6}
         \textbf{Item} & """
 
     columns = ' '.join([f"\\textbf{'{'+str(col)+'}'} &" for col in debt_service.table_debt_service.columns])[:-2] + "\\\\ \\hline \n"
     out += columns
 
     out += r"""
-    \rowcolor[HTML]{03c8a8}
+    \rowcolor[HTML]{b0e0e6}
     \multicolumn{9}{|c|}{\textbf{Cash Accrual}}\\ \hline
     """
 
@@ -42,7 +42,7 @@ def generate_tex_file(debt_service, out_path):
     out += r"\textbf{Total}"  + ' '.join([f"& {round(i,2)}" for i in debt_service.total_cash_accrual]) + " \\\\ \\hline"
 
     out += r"""
-    \rowcolor[HTML]{03c8a8}
+    \rowcolor[HTML]{b0e0e6}
     \multicolumn{9}{|c|}{\textbf{Repayment}}\\ \hline
     """
 
