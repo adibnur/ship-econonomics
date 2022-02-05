@@ -11,7 +11,7 @@ def generate_tex_file(payback_period, out_path):
 
     \begin{flushleft}
     \begin{huge}
-    \textbf{Annex XIV Payback Period}
+    \textbf{Payback Period}
     \end{huge}
     \end{flushleft}
 
@@ -21,6 +21,7 @@ def generate_tex_file(payback_period, out_path):
     \begin{flushleft}
 
     \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \multicolumn{5}{r}{BDT in Lac}\\
         \hline
         \rowcolor[HTML]{03c8a8}
         """
@@ -33,6 +34,17 @@ def generate_tex_file(payback_period, out_path):
         rows += f"{int(row[0])} & " + ' '.join([f"{round(i,2)} &" for i in row[1:]])[:-1] + "\\\\ \\hline \n"
 
     out += rows
+
+    out += r"""
+    \end{tabular}
+
+    \vspace{1cm}
+
+    \begin{tabular}{|p{5cm}|p{1cm}|}
+         \hline
+         \rowcolor[HTML]{03c8a8}"""
+
+    out += r"\textbf{Payback period in years} &" + str(payback_period.payback_period) + r"\\ \hline"
 
     out += r"""
     \end{tabular}

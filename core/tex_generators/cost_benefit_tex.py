@@ -20,7 +20,8 @@ def generate_tex_file(cost_benefit, out_path):
     \def\arraystretch{1.2}
     \begin{flushleft}
 
-    \begin{tabular}{|p{1cm}|p{1cm}|p{2cm}|p{1cm}|p{2cm}|p{1cm}|p{2cm}|p{2cm}|p{1cm}|}
+    \begin{tabular}{|p{1cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.75cm}|p{1.75cm}|p{1.5cm}|p{1.5cm}|p{1.75cm}|}
+        \multicolumn{8}{r}{BDT in Lac}\\
         \hline
         \rowcolor[HTML]{03c8a8}
         """
@@ -47,7 +48,7 @@ def generate_tex_file(cost_benefit, out_path):
         \hline
         \rowcolor[HTML]{03c8a8}
         """
-    out += r"\textbf{Benefit Cost Ratio} &" + f"{round(cost_benefit.cost_benefit_ratio, 2)}" + " \\\\ \hline"
+    out += r"\textbf{Benefit Cost Ratio (BCR)} &" + f"{round(cost_benefit.cost_benefit_ratio, 2)}" + ": 1" + " \\\\ \hline"
 
     out += r"""
     \end{tabular}

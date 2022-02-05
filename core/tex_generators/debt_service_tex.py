@@ -18,10 +18,11 @@ def generate_tex_file(debt_service, out_path):
     \begin{flushleft}
 
     \begin{tabular}{|p{3cm}|c|c|c|c|c|c|c|c|}
+    \multicolumn{9}{r}{BDT in Lac}\\
         \hline
 
         \rowcolor[HTML]{03c8a8}
-        \multicolumn{1}{|c|}{} & \multicolumn{8}{c|}{Year}\\ \hline
+        \multicolumn{1}{|c|}{} & \multicolumn{8}{c|}{\textbf{Year}}\\ \hline
 
         \rowcolor[HTML]{03c8a8}
         \textbf{Item} & """

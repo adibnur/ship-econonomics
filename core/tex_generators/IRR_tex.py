@@ -22,6 +22,7 @@ def generate_tex_file(IRR, out_path):
     \begin{flushleft}
 
     \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \multicolumn{4}{r}{BDT in Lac}\\
         \hline
         \rowcolor[HTML]{03c8a8}
         """
