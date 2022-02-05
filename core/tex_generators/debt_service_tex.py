@@ -9,7 +9,7 @@ def generate_tex_file(debt_service, out_path):
     \begin{document}
 
     \begin{huge}
-    \textbf{Annex XV Debt-Service Coverage Ratio}
+    \textbf{Debt-Service Coverage Ratio}
     \end{huge}
 
     \vspace{1cm}
@@ -37,7 +37,7 @@ def generate_tex_file(debt_service, out_path):
 
     out += r"\textbf{Operating profit}" + ' '.join([f"& {round(i,2)}" for i in debt_service.operating_profit]) + " \\\\ \\hline"
 
-    out += r"\textbf{Interest on project loan}" + ' '.join([f"& {round(i,2)}" for i in debt_service.interest_project_loan]) + " \\\\ \\hline"
+    #out += r"\textbf{Interest on project loan}" + ' '.join([f"& {round(i,2)}" for i in debt_service.interest_project_loan]) + " \\\\ \\hline"
 
     out += r"\textbf{Total}"  + ' '.join([f"& {round(i,2)}" for i in debt_service.total_cash_accrual]) + " \\\\ \\hline"
 

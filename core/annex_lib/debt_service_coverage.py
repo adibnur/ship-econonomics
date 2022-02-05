@@ -12,11 +12,11 @@ class debt_service_coverage:
         # Operating Profit
         self.operating_profit = income_statement.operating_profit
 
-        # Interest on Project Loan
-        self.interest_project_loan = income_statement.interest_long_short
+        # Interest on Project Loan - Keeping out ot calculation - Seems wrong
+        #self.interest_project_loan = income_statement.interest_long_short
 
         # Total - Cash accrual
-        self.total_cash_accrual = np.array(self.operating_profit) + income_statement.interest_long_short
+        self.total_cash_accrual = np.array(self.operating_profit)
 
         ## Repayment
 
@@ -40,12 +40,12 @@ class debt_service_coverage:
 
     def get_table_debt_service(self, inp_flow):
         cols = range(1, inp_flow.financial_assumptions.report_lenght_years + 1)
-        df = pd.DataFrame([self.operating_profit, self.interest_project_loan, self.total_cash_accrual,
-                        self.repayment_project_loan, self.interest_project_loan, self.total_repayment,
+        df = pd.DataFrame([self.operating_profit, self.total_cash_accrual, self.repayment_project_loan,
+                        self.interest_project_loan, self.total_repayment,
                         self.debt_service_ratio], columns=cols)
 
-        df.insert(0, "Item", ["Operating Profit", "Interest on Project Loan",
-                    "Total - Cash accrual",    "Repayment of Project Loan", "Interest on Project loan",
+        df.insert(0, "Item", ["Operating Profit", "Total - Cash accrual",
+                    "Repayment of Project Loan", "Interest on Project loan",
                     "Total - Repayment", "Debt Service Coverage Ratio (Times)"])
         df.set_index("Item", inplace=True)
 

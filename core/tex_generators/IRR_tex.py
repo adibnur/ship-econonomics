@@ -12,7 +12,7 @@ def generate_tex_file(IRR, out_path):
 
     \begin{flushleft}
     \begin{huge}
-    \textbf{Annex XI Internal Rate of Return}
+    \textbf{Internal Rate of Return}
     \end{huge}
     \end{flushleft}
 

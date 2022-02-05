@@ -11,7 +11,7 @@ def generate_tex_file(cost_benefit, out_path):
 
     \begin{flushleft}
     \begin{huge}
-    \textbf{Annex XII Cost-Benefit Analysis}
+    \textbf{Cost-Benefit Analysis}
     \end{huge}
     \end{flushleft}
 
