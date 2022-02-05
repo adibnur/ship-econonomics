@@ -14,7 +14,7 @@ if __name__=="__main__":
                 break
         except:
             print("Invalid project name")
-            project_name = input("Please enter a new project_name: ")
+            project_name = input("Please enter a new project name: ")
 
     while True:
         try:

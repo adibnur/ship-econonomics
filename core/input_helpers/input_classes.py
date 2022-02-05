@@ -76,6 +76,8 @@ class financial_assumptions:
 
         self.disc_rate_cost_benefit = self.df.loc['Discount Rate for Cost Benefit Analysis', 'Value']
 
+        self.project_lifetime = self.df.loc['Total Project Life Time (Years)', 'Value']
+
         # calculated. not for input
         self.report_lenght_years = self.loan_period - (self.construction_period + self.grace_period) / 12
         self.report_lenght_years = ceil(self.report_lenght_years)

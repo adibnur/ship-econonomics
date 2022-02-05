@@ -30,7 +30,7 @@ if __name__=='__main__':
     )
 
     # Make output directory for storing .tex output files
-    Path(project_path + "\\Output Files").mkdir()
+    Path(project_path + "\\Output Files").mkdir(exist_ok=True)
 
     # Generating IRR .tex file
     irr = annex_lib.IRR(inp_flow)
