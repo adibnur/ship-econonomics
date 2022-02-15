@@ -106,8 +106,8 @@ class break_even_analysis:
         cols = range(1, inp_flow.financial_assumptions.report_lenght_years + 1)
         df = pd.DataFrame([self.depr_ammor, self.admin_expense, self.interest_long_short,
                             self.total_fixed_cost], columns=cols)
-        df.insert(0, "Item", ["Depreciation & amortization", "Administrative expenses",
-                        "Financial expenses (Interest on long & short debt)", "Total"])
+        df.insert(0, "Item", ["Depreciation and amortization", "Administrative expenses",
+                        "Financial expenses (Interest on long and short debt)", "Total"])
         df.set_index("Item", inplace=True)
 
         return df
@@ -116,7 +116,7 @@ class break_even_analysis:
         cols = range(1, inp_flow.financial_assumptions.report_lenght_years + 1)
         df = pd.DataFrame([self.general_expense, self.repair_maintenance,
                         self.total_annual_reg_cost], columns=cols)
-        df.insert(0, "Item", ["General expense", "Repair & maintenance", "Total"])
+        df.insert(0, "Item", ["General expense", "Repair and maintenance", "Total"])
         df.set_index("Item", inplace=True)
 
         return df
