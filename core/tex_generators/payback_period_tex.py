@@ -1,19 +1,21 @@
 def generate_tex_file(payback_period, out_path, column_color='b0e0e6'):
-    out = get_tex_table(payback_period=payback_period, column_color=column_color)
-    with open(out_path, "w") as f:
-        f.write(out)
-
-def get_tex_table(payback_period, column_color='b0e0e6'):
-    out = r"""
-    \documentclass{article}
+    out =  r"""\documentclass{article}
     \usepackage[utf8]{inputenc}
     \usepackage{fullpage}
     \usepackage[table]{xcolor}
     \renewcommand{\familydefault}{\sfdefault}
 
 
-    \begin{document}
+    \begin{document}"""
 
+    out += get_tex_table(payback_period=payback_period, column_color=column_color)
+
+    out += r"\end{document}"
+    with open(out_path, "w") as f:
+        f.write(out)
+
+def get_tex_table(payback_period, column_color='b0e0e6'):
+    out = r"""
     \begin{flushleft}
     \begin{huge}
     \textbf{Payback Period}
@@ -57,7 +59,6 @@ def get_tex_table(payback_period, column_color='b0e0e6'):
     \end{tabular}
 
     \end{flushleft}
-
-    \end{document}"""
+    """
 
     return out

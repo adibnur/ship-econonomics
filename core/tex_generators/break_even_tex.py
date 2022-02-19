@@ -1,18 +1,20 @@
 def generate_tex_file(break_even, out_path, column_color='b0e0e6'):
-    out = get_tex_table(break_even=break_even, column_color=column_color)
-    with open(out_path, "w") as f:
-        f.write(out)
-
-def get_tex_table(break_even, column_color='b0e0e6'):
-    out = r"""
-    \documentclass[10pt, a4paper]{article}
+    out = r"""\documentclass[10pt, a4paper]{article}
     \usepackage[utf8]{inputenc}
     \usepackage{fullpage}
     \usepackage[table]{xcolor}
     \renewcommand{\familydefault}{\sfdefault}
 
-    \begin{document}
+    \begin{document}"""
 
+    out += get_tex_table(break_even=break_even, column_color=column_color)
+
+    out += r"\end{document}"
+    with open(out_path, "w") as f:
+        f.write(out)
+
+def get_tex_table(break_even, column_color='b0e0e6'):
+    out = r"""
     \begin{huge}
     \textbf{Break-even Analysis}
     \end{huge}
@@ -64,8 +66,6 @@ def get_tex_table(break_even, column_color='b0e0e6'):
     \end{tabular}
 
     \end{flushleft}
-
-    \end{document}
     """
 
     return out

@@ -5,9 +5,9 @@ class financial_report:
     def __init__(self, inp_flow):
         ixs = [
             "Vessel Purchase / Construction",
-            "Furniture & Fixture",
-            "Security deposit for office advance & utitlities",
-            "Preliminary & startup expense"
+            "Furniture and Fixture",
+            "Security deposit for office advance and utitlities",
+            "Preliminary and startup expense"
         ]
 
         tot_col = [
