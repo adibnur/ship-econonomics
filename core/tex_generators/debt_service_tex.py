@@ -1,3 +1,8 @@
+def generate_appendix_tex(debt_service, out_path, column_color='b0e0e6'):
+    out = get_tex_table(debt_service=debt_service, column_color=column_color)
+    with open(out_path, "w") as f:
+        f.write(out)
+
 def generate_tex_file(debt_service, out_path, column_color='b0e0e6'):
     out = r"""\documentclass[10pt, a4paper]{article}
     \usepackage[utf8]{inputenc}

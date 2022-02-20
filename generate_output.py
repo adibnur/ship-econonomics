@@ -31,23 +31,30 @@ if __name__=='__main__':
 
     # Make output directory for storing .tex output files
     Path(project_path + "\\Output Files").mkdir(exist_ok=True)
+    Path(project_path + "\\Output Files\\Appendix").mkdir(exist_ok=True)
 
     # Generating IRR .tex file
     irr = annex_lib.IRR(inp_flow)
-    tex_generators.IRR_tex.generate_tex_file(irr, project_path+"\\Output Files\\IRR.tex")
+    tex_generators.IRR_tex.generate_appendix_tex(irr, project_path+"\\Output Files\\Appendix\\IRR.tex")
 
     # Generating Cost Benefit Analysis .tex file
     cba = annex_lib.cost_benefit_analysis(inp_flow)
-    tex_generators.cost_benefit_tex.generate_tex_file(cba, project_path+"\\Output Files\\Cost Benefit Analysis.tex")
+    tex_generators.cost_benefit_tex.generate_appendix_tex(cba, project_path+"\\Output Files\\Appendix\\Cost Benefit Analysis.tex")
 
     # Generating Debt Service Coverage Ratio .tex file
     dscr = annex_lib.debt_service_coverage(inp_flow)
-    tex_generators.debt_service_tex.generate_tex_file(dscr, project_path+"\\Output Files\\Debt Service Coverage.tex")
+    tex_generators.debt_service_tex.generate_appendix_tex(dscr, project_path+"\\Output Files\\Appendix\\Debt Service Coverage.tex")
 
     # Generating Payback Period .tex file
     pbp = annex_lib.payback_period(inp_flow)
-    tex_generators.payback_period_tex.generate_tex_file(pbp, project_path+"\\Output Files\\Payback Period.tex")
+    tex_generators.payback_period_tex.generate_appendix_tex(pbp, project_path+"\\Output Files\\Appendix\\Payback Period.tex")
 
     # Generating Break Even Analysis .tex file
     bea = annex_lib.break_even_analysis(inp_flow)
-    tex_generators.break_even_tex.generate_tex_file(bea, project_path+"\\Output Files\\Break Even Analysis.tex")
+    tex_generators.break_even_tex.generate_appendix_tex(bea, project_path+"\\Output Files\\Appendix\\Break Even Analysis.tex")
+
+    # Generating Chapter 1
+    tex_generators.chapter_1.generate_chapter1_tex(inp_flow, project_path+"\\Output Files\\Appendix\\Chapter 1.tex")
+
+    # Generating Report
+    tex_generators.report.generate_report_tex(inp_flow, project_path+"\\Output Files\\Report.tex")

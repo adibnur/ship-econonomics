@@ -8,7 +8,7 @@ class cost_benefit_analysis:
         income_statement = est_income_statement(inp_flow)
 
         capital_cost_1 = financial_report(inp_flow).df_project_cost.loc[["Vessel Purchase / Construction",
-                                    "Furniture & Fixture", "Security deposit for office advance & utitlities"],
+                                    "Furniture and Fixture", "Security deposit for office advance and utitlities"],
                                     "Total (BDT in Lac)"].sum()
 
         self.capital_cost = [capital_cost_1] + [0] * inp_flow.financial_assumptions.report_lenght_years

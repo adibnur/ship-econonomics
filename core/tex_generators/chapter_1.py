@@ -1,10 +1,15 @@
 def generate_chapter1_tex(inp_flow, out_path, column_color_RGB='176,224,230', alt_row_color_RGB='240,248,255'):
+    out = generate_chapter1_tables(inp_flow, column_color_RGB, alt_row_color_RGB)
+
+    with open(out_path, "w") as f:
+        f.write(out)
+
+def generate_chapter1_tables(inp_flow, column_color_RGB='176,224,230', alt_row_color_RGB='240,248,255'):
     out = generate_chapter1_1p1_1p2(inp_flow, column_color_RGB, alt_row_color_RGB)
     out += '\n' + generate_chapter1_1p3p1(inp_flow)
     out += '\n' + generate_chapter1_1p3p2(inp_flow)
 
-    with open(out_path, "w") as f:
-        f.write(out)
+    return out
 
 def generate_chapter1_1p1_1p2(inp_flow, column_color_RGB, alt_row_color_RGB):
     out = r"\definecolor{alt_row_color}{RGB}{" + alt_row_color_RGB + "}"

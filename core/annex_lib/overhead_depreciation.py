@@ -63,7 +63,7 @@ class overhead_depreciation:
     def get_table_depreciation(self, inp_flow):
         cols = range(1, inp_flow.financial_assumptions.report_lenght_years + 1)
         df = pd.DataFrame([self.vessel_depr, self.furniture_depr], columns=cols)
-        df.insert(0, "Description", ["Cargo Vessels",	"Furniture & Fixture"])
+        df.insert(0, "Description", ["Cargo Vessels",	"Furniture and Fixture"])
         df.set_index("Description", inplace=True)
 
         return df
@@ -72,8 +72,8 @@ class overhead_depreciation:
         cols = range(1, inp_flow.financial_assumptions.report_lenght_years + 1)
         df = pd.DataFrame([self.stores_and_spares, self.maintenance_vessel,
                     self.utilities, self.office_rent, self.other_overheads], columns=cols)
-        df.insert(0, "Item", ["Stores & Spares", "Repair & Maintenance - Vessels",
-                    "Utilities", "Rent, Tax & Insurance etc.", "Other overheads"])
+        df.insert(0, "Item", ["Stores and Spares", "Repair and Maintenance - Vessels",
+                    "Utilities", "Rent, Tax and Insurance etc.", "Other overheads"])
         df.set_index("Item", inplace=True)
 
         return df

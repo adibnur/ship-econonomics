@@ -8,7 +8,7 @@ class IRR:
         income_statement = est_income_statement(inp_flow)
 
         net_receipt_1 = financial_report(inp_flow).df_project_cost.loc[["Vessel Purchase / Construction",
-                                    "Furniture & Fixture", "Security deposit for office advance & utitlities"],
+                                    "Furniture and Fixture", "Security deposit for office advance and utitlities"],
                                     "Total (BDT in Lac)"].sum() * (-1)
 
         self.net_receipt = [net_receipt_1] +  (income_statement.revenue - (income_statement.service_mat
