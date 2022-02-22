@@ -1,9 +1,12 @@
 import pandas as pd
 import numpy as np
+from copy import deepcopy
 from .IRR import IRR
 
 class payback_period:
     def __init__(self, inp_flow):
+        inp_flow = deepcopy(inp_flow) # to avoid editing mutable dicts
+
         stop = False
         # set max number of years in report to 100 if lifetime is given 4 digit input
         if len(str(int(inp_flow.financial_assumptions.project_lifetime))) > 3:
