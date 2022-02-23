@@ -1,4 +1,5 @@
 from . import annex_lib
+from copy import deepcopy
 
 class project_metrics:
     def __init__(self, inp_flow):
@@ -34,11 +35,89 @@ class project_metrics:
 
 class sensitivity:
     def __init__(self, inp_flow):
-        self.project_metrics = project_metrics(inp_flow)
+        pass
 
     @staticmethod
-    def get_var_sensitivity(var:str, inp_flow) -> float:
+    def get_var_sensitivity(var:str, inp_flow, _range=(70,210), _step=10) -> list:
         """
         computes the ratio of percentage change of metrics for specified variable
         """
-        pass
+        inp_flow = deepcopy(inp_flow)
+
+        if get_ipython().__class__.__name__=='ZMQInteractiveShell':
+            from tqdm.notebook import tqdm
+        else:
+            from tqdm import tqdm
+
+        try:
+            var_value = inp_flow.__dict__[var]
+        except KeyError:
+            var_value = inp_flow.financial_assumptions.__dict__[var]
+
+        out = [[], []]
+        for i in tqdm(range(_range[0], _range[1], _step)):
+            pcntg = i/100
+
+            try:
+                inp_flow.__dict__[var] = var_value * (pcntg)
+            except KeyError:
+                inp_flow.financial_assumptions.__dict__[var] = var_value * (pcntg)
+
+            out[0].append(var_value * (pcntg))
+            out[1].append(project_metrics(inp_flow))
+
+        return out
+
+    @staticmethod
+    def get_fuel_sensitivity(inp_flow, _range=(70,210), _step=10) -> list:
+        """
+        computes the ratio of percentage change of metrics for fuel price
+        """
+        from .input_helpers.input_classes import technical_inputs
+        ti = technical_inputs('core\\sample_inputs\\input_technical.xlsx')
+        to_ded = ti.df_service_mat[~(ti.df_service_mat.Item=='Fuel & Lubricant')]['Cost per Year (BDT in Lac)'].sum()
+
+        inp_flow = deepcopy(inp_flow)
+        if get_ipython().__class__.__name__=='ZMQInteractiveShell':
+            from tqdm.notebook import tqdm
+        else:
+            from tqdm import tqdm
+
+        var_value = inp_flow.service_mat - to_ded
+
+        out = [[], []]
+        for i in tqdm(range(_range[0], _range[1], _step)):
+            pcntg = i/100
+
+            inp_flow.service_mat = var_value * (pcntg)
+
+            out[0].append(var_value * (pcntg))
+            out[1].append(project_metrics(inp_flow))
+
+        out[0] = [i/var_value for i in out[0]]
+
+        return out
+
+    @staticmethod
+    def get_debt_ratio_sensitivity(inp_flow) -> list:
+        """
+        computes the ratio of percentage change of metrics for change in Debt ratio
+        returns sensitivity for 10% to 100% Debt ratios
+        """
+        inp_flow = deepcopy(inp_flow)
+        if get_ipython().__class__.__name__=='ZMQInteractiveShell':
+            from tqdm.notebook import tqdm
+        else:
+            from tqdm import tqdm
+
+        out = [[], [], []]
+        for i in tqdm(range(10, 101, 1)):
+            pcntg = i/100
+
+            inp_flow.financial_assumptions.debt_equity['Debt'] = pcntg
+            inp_flow.financial_assumptions.debt_equity['Equity'] = 1 - pcntg
+
+            out[0].append(pcntg)
+            out[1].append(project_metrics(inp_flow))
+
+        return out
