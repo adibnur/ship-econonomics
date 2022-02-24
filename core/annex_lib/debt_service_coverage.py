@@ -24,7 +24,7 @@ class debt_service_coverage:
         self.repayment_project_loan = rev_ear.principal_debt_exp
 
         # Interest on Project loan
-        self.interest_project_loan = rev_ear.interest_debt_exp
+        self.interest_project_loan = np.array(rev_ear.interest_debt_exp) + rev_ear.interest_working_cap
 
         # Total - Repayment
         self.total_repayment = np.array(self.repayment_project_loan) + self.interest_project_loan
