@@ -30,6 +30,9 @@ class technical_inputs:
 
         self.df_expenses = pd.read_excel(df_dir, sheet_name='Expenses', engine='openpyxl')
 
+        # storing revenue earnings df for rfr calculation
+        self.df_revenue_earnings_raw = pd.read_excel(df_dir, sheet_name='Revenue Earnings', engine='openpyxl')
+        
 class financial_assumptions:
     def __init__(self, df_dir):
         self.df = pd.read_excel(df_dir, sheet_name='Economic Assumptuions', engine='openpyxl')
@@ -81,6 +84,9 @@ class financial_assumptions:
         # calculated. not for input
         self.report_lenght_years = self.loan_period - (self.construction_period + self.grace_period) / 12
         self.report_lenght_years = ceil(self.report_lenght_years)
+
+        # Added later for RFR
+        self.rfr_discount_rate =  self.df.loc['Discount Rate for Required Freight Rate', 'Value']
 
 
     def __repr__(self):

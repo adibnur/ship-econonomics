@@ -36,5 +36,18 @@ class input_flow:
         s1 = df_exp[~(df_exp['Description']=='Cargo Vessels Maintenance')]
         self.general_expense = s1[~(s1['Description']=='Spares and stores')]
 
+        # 2.x. revenue earnings raw df for rfr calculation
+        self.df_revenue_earnings_raw = input_classes.technical_inputs(df_technical).df_revenue_earnings_raw
+
         # 3. Financial Analysis
         self.financial_assumptions = input_classes.financial_assumptions(df_financial)
+
+
+    def get_revenue_capacity(self, freight_rate:float)->float:
+        df_revenue = self.df_revenue_earnings_raw.copy()
+        df_revenue['Freight Charge / MT (BDT)'] = freight_rate
+        df_revenue['Yearly Revenue (BDT in Lac)'] = (df_revenue['Number of Trip / Month'] * 12
+            * df_revenue['Vessel carrying capacity (MT)'] * df_revenue['Freight Charge / MT (BDT)']
+            * df_revenue['No. of vessels'] * 2 / 100000)
+
+        return df_revenue['Yearly Revenue (BDT in Lac)'].sum()
