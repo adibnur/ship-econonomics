@@ -9,3 +9,4 @@ from .overhead_depreciation import overhead_depreciation
 from .payback_period import payback_period
 from .revenue_earnings_estimate import revenue_earnings
 from .working_capital_assessment import working_capital
+from .required_freight_rate import required_freight_rate

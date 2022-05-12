@@ -1,5 +1,6 @@
-from . import annex_lib
 from copy import deepcopy
+import numpy as np
+from . import annex_lib
 
 class project_metrics:
     def __init__(self, inp_flow):
@@ -12,6 +13,7 @@ class project_metrics:
         cost_benefit = annex_lib.cost_benefit_analysis(inp_flow)
         payback_period = annex_lib.payback_period(inp_flow)
         irr = annex_lib.IRR(inp_flow)
+        rfr = annex_lib.required_freight_rate(inp_flow)
 
         # array-like
         self.value_service_sold = rev_ear.value_service_sold
@@ -32,6 +34,7 @@ class project_metrics:
         self.cost_benefit_ratio = cost_benefit.cost_benefit_ratio
         self.payback_period = payback_period.payback_period
         self.irr = irr.irr
+        self.rfr = rfr.rfr
 
 class sensitivity:
     def __init__(self, inp_flow):
@@ -99,7 +102,7 @@ class sensitivity:
         return out
 
     @staticmethod
-    def get_debt_ratio_sensitivity(inp_flow) -> list:
+    def get_debt_ratio_sensitivity(inp_flow, pctg_range_list=range(10, 101, 1)) -> list:
         """
         computes the ratio of percentage change of metrics for change in Debt ratio
         returns sensitivity for 10% to 100% Debt ratios
@@ -111,7 +114,7 @@ class sensitivity:
             from tqdm import tqdm
 
         out = [[], [], []]
-        for i in tqdm(range(10, 101, 1)):
+        for i in tqdm(pctg_range_list):
             pcntg = i/100
 
             inp_flow.financial_assumptions.debt_equity['Debt'] = pcntg
@@ -119,5 +122,26 @@ class sensitivity:
 
             out[0].append(pcntg)
             out[1].append(project_metrics(inp_flow))
+
+        return out
+
+    @staticmethod
+    def get_num_trips_sensitivity(inp_flow, avg_monthly_trips=np.linspace(2,4,101)):
+        if get_ipython().__class__.__name__=='ZMQInteractiveShell':
+                from tqdm.notebook import tqdm
+        else:
+            from tqdm import tqdm
+
+        from .input_helpers.input_classes import technical_inputs
+        dfrev = technical_inputs('core\\sample_inputs\\input_technical.xlsx').df_revenue
+
+        out = [[], []] # [[<num_avg_trips>], [<project_metrics>]]
+        for avg_trips in tqdm(avg_monthly_trips):
+            iflow = deepcopy(inp_flow)
+            iflow.revenue_capacity = ((dfrev['Vessel carrying capacity (MT)'] * dfrev['No. of vessels'] *
+                                       dfrev['Freight Charge / MT (BDT)'] * 2 * avg_trips*12) / 10**5)[0]
+
+            out[0].append(avg_trips)
+            out[1].append(project_metrics(iflow))
 
         return out
