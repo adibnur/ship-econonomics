@@ -77,7 +77,7 @@ class sensitivity:
         computes the ratio of percentage change of metrics for fuel price
         """
         from .input_helpers.input_classes import technical_inputs
-        ti = technical_inputs('core\\sample_inputs\\input_technical.xlsx')
+        ti = technical_inputs('core/sample_inputs/input_technical.xlsx')
         to_ded = ti.df_service_mat[~(ti.df_service_mat.Item=='Fuel & Lubricant')]['Cost per Year (BDT in Lac)'].sum()
 
         inp_flow = deepcopy(inp_flow)
@@ -133,7 +133,7 @@ class sensitivity:
             from tqdm import tqdm
 
         from .input_helpers.input_classes import technical_inputs
-        dfrev = technical_inputs('core\\sample_inputs\\input_technical.xlsx').df_revenue
+        dfrev = technical_inputs('core/sample_inputs/input_technical.xlsx').df_revenue
 
         out = [[], []] # [[<num_avg_trips>], [<project_metrics>]]
         for avg_trips in tqdm(avg_monthly_trips):
@@ -143,5 +143,34 @@ class sensitivity:
 
             out[0].append(avg_trips)
             out[1].append(project_metrics(iflow))
+
+        return out
+
+    @staticmethod
+    def get_steel_sensitivity(inp_flow, _range=(70,210), _step=10) -> list:
+        """
+        computes the ratio of percentage change of metrics for steel price
+        based on reference from Martin Stopford's book -> (steel cost can be approximated as 13% of total vessel cost)
+        """
+        inp_flow = deepcopy(inp_flow)
+
+        if get_ipython().__class__.__name__=='ZMQInteractiveShell':
+            from tqdm.notebook import tqdm
+        else:
+            from tqdm import tqdm
+
+        
+        var_value = inp_flow.purchase_vessel
+
+        out = [[], []]
+        for i in tqdm(range(_range[0], _range[1], _step)):
+            pcntg = i/100
+
+
+            inp_flow.purchase_vessel = (var_value * 0.87) + (var_value * .13 * pcntg)
+
+
+            out[0].append(inp_flow.purchase_vessel)
+            out[1].append(project_metrics(inp_flow))
 
         return out
